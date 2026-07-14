@@ -179,10 +179,14 @@ export async function onRequest(context) {
     return new Response(null, { status: 204 });
   }
 
-  const pathParts = (params.path || '').split('/').filter(Boolean);
+  const rawPath = params.path;
+  const pathStr = Array.isArray(rawPath) ? rawPath.join('/') : (rawPath || '');
+  const pathParts = pathStr.split('/').filter(Boolean);
   const route = pathParts.join('/');
 
   try {
+    if (!env.DB) return error('Database not configured', 503);
+    if (!env.JWT_SECRET) return error('Server not configured', 503);
     // ── Public auth routes ──
     if (method === 'POST' && route === 'auth/register') {
       const { username, password } = await request.json();
