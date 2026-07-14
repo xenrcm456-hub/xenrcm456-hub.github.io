@@ -20,7 +20,7 @@ function uid() {
 
 function b64url(bytes) {
   const str = typeof bytes === 'string'
-    ? bytes
+    ? btoa(bytes)
     : btoa(String.fromCharCode(...new Uint8Array(bytes)));
   return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
@@ -189,23 +189,58 @@ export async function onRequest(context) {
     if (!env.JWT_SECRET) return error('Server not configured', 503);
     // ── Public auth routes ──
     if (method === 'POST' && route === 'auth/register') {
-      const { username, password } = await request.json();
-      if (!username || !password) return error('Username and password required');
+      const { username, password, key, hwid } = await request.json();
+      if (!username || !password || !key) return error('Username, password, and license key required');
       if (username.length < 3) return error('Username must be at least 3 characters');
       if (password.length < 6) return error('Password must be at least 6 characters');
 
       const existing = await env.DB.prepare('SELECT id FROM users WHERE username = ?').bind(username).first();
       if (existing) return error('Username already exists', 409);
 
+      const license = await env.DB.prepare(
+        'SELECT * FROM license_keys WHERE key_value = ? COLLATE NOCASE'
+      ).bind(key.trim()).first();
+      if (!license) return error('Invalid license key', 404);
+      if (license.status === 'revoked') return error('This key has been revoked', 403);
+      if (license.redeemed_by) return error('This key has already been redeemed', 403);
+      if (license.expires !== 'lifetime' && new Date(license.expires) < new Date()) {
+        return error('This key has expired', 403);
+      }
+
+      const userHwid = hwid || `HWID-${crypto.randomUUID().replace(/-/g, '').slice(0, 16)}`;
+      const banned = await env.DB.prepare('SELECT id FROM hwid_blacklist WHERE hwid = ?').bind(userHwid).first();
+      if (banned) return error('Your HWID is blacklisted', 403);
+
+      if (license.locked_hwid && license.locked_hwid !== userHwid) {
+        return error('This key is locked to a different HWID', 403);
+      }
+
       const id = uid();
       const hash = await hashPassword(password);
       const now = new Date().toISOString();
+
       await env.DB.prepare(
-        'INSERT INTO users (id, username, email, password_hash, status, created_at) VALUES (?, ?, ?, ?, ?, ?)'
-      ).bind(id, username, `${username}@velvet.local`, hash, 'active', now).run();
+        'INSERT INTO users (id, username, email, password_hash, hwid, license_key, license_expires, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+      ).bind(id, username, `${username}@velvet.local`, hash, userHwid, license.key_value, license.expires, 'active', now).run();
+
+      await env.DB.prepare(
+        'UPDATE license_keys SET locked_hwid = ?, redeemed_by = ? WHERE id = ?'
+      ).bind(userHwid, id, license.id).run();
 
       const token = await signToken({ sub: id, type: 'user' }, env.JWT_SECRET);
-      return json({ token, user: { id, username, email: `${username}@velvet.local` } }, 201);
+      return json({
+        token,
+        user: {
+          id,
+          username,
+          email: `${username}@velvet.local`,
+          hwid: userHwid,
+          key: license.key_value,
+          expires: license.expires,
+          hwidResetsUsed: 0,
+          status: 'active'
+        }
+      }, 201);
     }
 
     if (method === 'POST' && route === 'auth/login') {
