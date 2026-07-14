@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>velvet — Dashboard</title>
+  <link rel="icon" href="flower.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="noise"></div>
+
+  <!-- Dashboard -->
+  <div class="dashboard-container" id="dashboard-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <a href="index.html" class="sidebar-brand">
+          <img src="flower.png" alt="velvet">
+          <span>velvet</span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-group">
+          <span class="nav-group-label">Main</span>
+          <a href="#" class="nav-item" data-page="dashboard">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+              <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+              <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+              <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+            </svg>
+            Dashboard
+          </a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Actions</span>
+          <a href="#" class="nav-item" data-page="combat">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.5 17.5L3 6V3h3l11.5 11.5"></path>
+              <path d="M13 19l6-6"></path>
+              <path d="M16 16l4 4"></path>
+              <path d="M19 21l2-2"></path>
+            </svg>
+            Combat
+          </a>
+          <a href="#" class="nav-item" data-page="movement">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="5" r="2"></circle>
+              <path d="M12 7v6"></path>
+              <path d="M8 21l4-8 4 8"></path>
+            </svg>
+            Movement
+          </a>
+          <a href="#" class="nav-item" data-page="visuals">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            Visuals
+          </a>
+          <a href="#" class="nav-item" data-page="misc">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+            </svg>
+            Miscellaneous
+          </a>
+        </div>
+        <div class="nav-group nav-group-bottom">
+          <a href="#" class="nav-item active" data-page="settings">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+            </svg>
+            Settings
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-user">
+        <div class="user-avatar" id="sidebar-avatar">T</div>
+        <div class="user-info">
+          <span class="user-name" id="sidebar-username">testaccount123</span>
+          <a href="#" class="user-signout" id="signout">Sign out</a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <main class="main-content">
+      <!-- Settings Page -->
+      <section class="page active" id="page-settings">
+        <header class="page-header">
+          <h1>Settings</h1>
+          <p>Manage your account and subscription.</p>
+        </header>
+
+        <div class="card account-card">
+          <div class="account-profile">
+            <div class="user-avatar user-avatar-lg" id="account-avatar">T</div>
+            <span class="account-username" id="account-username">testaccount123</span>
+          </div>
+        </div>
+
+        <div class="card hwid-card">
+          <div class="card-row">
+            <div>
+              <h3 class="card-title">HWID Reset</h3>
+              <p class="card-desc">Unbind your current device — 3 resets per month.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="hwid-reset-btn">Reset HWID</button>
+          </div>
+          <div class="info-banner" id="hwid-banner">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+            <span id="hwid-banner-text">You've used both HWID resets this month. They reset on August 1, 2026.</span>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <div class="card license-card">
+            <div class="card-title-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+              </svg>
+              <h3 class="card-title">License &amp; Subscription</h3>
+            </div>
+            <div class="license-display">
+              <span class="license-key" id="license-key-display">VELVET-************</span>
+              <button class="btn-icon" id="show-license" aria-label="Toggle visibility">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+              </button>
+              <button class="btn-icon" id="copy-license" aria-label="Copy license">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+              </button>
+            </div>
+            <div class="license-meta">
+              <div class="meta-item">
+                <span class="meta-label">Plan</span>
+                <span class="meta-value" id="plan-value">Public</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Status</span>
+                <span class="meta-value status-active" id="status-value">Active</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-label">Expires</span>
+                <span class="meta-value" id="expires-value">Jul 8, 2026</span>
+              </div>
+            </div>
+            <div class="progress-section">
+              <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+              </div>
+              <div class="progress-footer">
+                <span class="progress-label" id="progress-label">12 hours remaining</span>
+                <a href="#" class="link-accent" id="renew-link">Renew with a new key</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card redeem-card">
+            <div class="card-title-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </svg>
+              <h3 class="card-title">Redeem a Key</h3>
+            </div>
+            <input type="text" class="redeem-input" id="redeem-input" placeholder="VELVET-XXXXXXXXXXXXXXXXXX">
+            <button class="btn btn-primary btn-full" id="redeem-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              Redeem Key
+            </button>
+          </div>
+        </div>
+
+        <div class="bottom-grid">
+          <div class="card loader-card">
+            <div class="card-row">
+              <div class="loader-info">
+                <div class="card-title-row">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  <h3 class="card-title">Velvet Loader</h3>
+                </div>
+                <p class="card-desc">Loader downloads are temporarily unavailable.</p>
+              </div>
+              <button class="btn btn-primary btn-sm btn-disabled" disabled>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Unavailable
+              </button>
+            </div>
+          </div>
+
+          <div class="card stats-card">
+            <div class="card-title-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+              </svg>
+              <h3 class="card-title">Session Stats</h3>
+            </div>
+            <div class="stats-row">
+              <div class="stat">
+                <span class="stat-value" id="uptime">00:00:00</span>
+                <span class="stat-label">Uptime</span>
+              </div>
+              <div class="stat">
+                <span class="stat-value" id="resets-used">2/3</span>
+                <span class="stat-label">HWID Resets</span>
+              </div>
+              <div class="stat">
+                <span class="stat-value status-active">Online</span>
+                <span class="stat-label">Status</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Placeholder pages -->
+      <section class="page" id="page-dashboard">
+        <header class="page-header">
+          <h1>Dashboard</h1>
+          <p>Overview of your velvet session.</p>
+        </header>
+        <div class="card placeholder-card">
+          <p class="card-desc">Welcome back. Head to Settings to manage your license, or explore Actions in the sidebar.</p>
+        </div>
+      </section>
+
+      <section class="page" id="page-combat">
+        <header class="page-header">
+          <h1>Combat</h1>
+          <p>Configure combat features.</p>
+        </header>
+        
+        <div class="card">
+          <div class="card-title-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.5 17.5L3 6V3h3l11.5 11.5"></path>
+              <path d="M13 19l6-6"></path>
+              <path d="M16 16l4 4"></path>
+              <path d="M19 21l2-2"></path>
+            </svg>
+            <h3 class="card-title">Aimbot</h3>
+          </div>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="aimbot-enabled" class="config-checkbox">
+                <span>Enable Aimbot</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">FOV</label>
+              <input type="range" id="aimbot-fov" class="config-slider" min="1" max="360" value="100">
+              <span class="config-value" id="aimbot-fov-value">100</span>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">Smoothing</label>
+              <input type="range" id="aimbot-smoothing" class="config-slider" min="1" max="50" value="10">
+              <span class="config-value" id="aimbot-smoothing-value">10</span>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="aimbot-teamcheck" class="config-checkbox">
+                <span>Team Check</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="aimbot-sticky" class="config-checkbox">
+                <span>Sticky Aim</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+            </svg>
+            <h3 class="card-title">Triggerbot</h3>
+          </div>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="triggerbot-enabled" class="config-checkbox">
+                <span>Enable Triggerbot</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">Clicks Per Second</label>
+              <input type="range" id="triggerbot-cps" class="config-slider" min="1" max="50" value="10">
+              <span class="config-value" id="triggerbot-cps-value">10</span>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="triggerbot-wallcheck" class="config-checkbox">
+                <span>Wall Check</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-movement">
+        <header class="page-header">
+          <h1>Movement</h1>
+          <p>Configure movement features.</p>
+        </header>
+        
+        <div class="card">
+          <div class="card-title-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+            </svg>
+            <h3 class="card-title">Speed Hack</h3>
+          </div>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="speed-enabled" class="config-checkbox">
+                <span>Enable Speed</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">Speed</label>
+              <input type="range" id="speed-value" class="config-slider" min="1" max="200" value="50">
+              <span class="config-value" id="speed-value-display">50</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12l5 5l10 -10"></path>
+            </svg>
+            <h3 class="card-title">Jump Hack</h3>
+          </div>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="jump-enabled" class="config-checkbox">
+                <span>Enable Jump</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">Jump Height</label>
+              <input type="range" id="jump-value" class="config-slider" min="1" max="200" value="50">
+              <span class="config-value" id="jump-value-display">50</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 8v8"></path>
+              <path d="M8 12h8"></path>
+            </svg>
+            <h3 class="card-title">Fly Hack</h3>
+          </div>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="fly-enabled" class="config-checkbox">
+                <span>Enable Fly</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">Fly Speed</label>
+              <input type="range" id="fly-speed" class="config-slider" min="1" max="200" value="50">
+              <span class="config-value" id="fly-speed-display">50</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-visuals">
+        <header class="page-header">
+          <h1>Visuals</h1>
+          <p>Configure visual features.</p>
+        </header>
+        
+        <div class="card">
+          <div class="card-title-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <h3 class="card-title">ESP</h3>
+          </div>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="esp-enabled" class="config-checkbox">
+                <span>Enable ESP</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="esp-box" class="config-checkbox">
+                <span>Box ESP</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="esp-name" class="config-checkbox">
+                <span>Name ESP</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="esp-healthbar" class="config-checkbox">
+                <span>Health Bar</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="esp-distance" class="config-checkbox">
+                <span>Distance ESP</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="esp-teamcheck" class="config-checkbox">
+                <span>Team Check</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            <h3 class="card-title">Chams</h3>
+          </div>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="chams-enabled" class="config-checkbox">
+                <span>Enable Chams</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">Chams Type</label>
+              <select id="chams-type" class="config-select">
+                <option value="0">Normal</option>
+                <option value="1">Flat</option>
+                <option value="2">Wireframe</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="page-misc">
+        <header class="page-header">
+          <h1>Miscellaneous</h1>
+          <p>Other configuration options.</p>
+        </header>
+        
+        <div class="card">
+          <div class="card-title-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <h3 class="card-title">Lighting</h3>
+          </div>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="fog-enabled" class="config-checkbox">
+                <span>Enable Fog</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">Fog Start</label>
+              <input type="range" id="fog-start" class="config-slider" min="0" max="1000" value="0">
+              <span class="config-value" id="fog-start-display">0</span>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">Fog End</label>
+              <input type="range" id="fog-end" class="config-slider" min="0" max="1000" value="500">
+              <span class="config-value" id="fog-end-display">500</span>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="shadows-disable" class="config-checkbox">
+                <span>Disable Shadows</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="clocktime-enabled" class="config-checkbox">
+                <span>Custom Clock Time</span>
+              </label>
+            </div>
+            
+            <div class="config-item">
+              <label class="config-label">Clock Time</label>
+              <input type="range" id="clocktime-value" class="config-slider" min="0" max="24" value="12">
+              <span class="config-value" id="clocktime-value-display">12</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <div class="card-title-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2v4"></path>
+              <path d="M12 18v4"></path>
+              <path d="M4.93 4.93l2.83 2.83"></path>
+              <path d="M16.24 16.24l2.83 2.83"></path>
+              <path d="M2 12h4"></path>
+              <path d="M18 12h4"></path>
+              <path d="M4.93 19.07l2.83-2.83"></path>
+              <path d="M16.24 7.76l2.83-2.83"></path>
+            </svg>
+            <h3 class="card-title">Anti-AFK</h3>
+          </div>
+          
+          <div class="config-grid">
+            <div class="config-item">
+              <label class="config-label">
+                <input type="checkbox" id="antiafk-enabled" class="config-checkbox">
+                <span>Enable Anti-AFK</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

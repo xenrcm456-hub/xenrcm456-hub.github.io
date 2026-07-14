@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - velvet</title>
+  <link rel="icon" href="../flower.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="glow"></div>
+
+  <!-- Admin Login -->
+  <div class="login-container" id="login-container">
+    <a href="../index.html" class="back-arrow" title="Back to website">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="19" y1="12" x2="5" y2="12"></line>
+        <polyline points="12 19 5 12 12 5"></polyline>
+      </svg>
+    </a>
+    <div class="login-box">
+      <div class="login-header">
+        <img src="../flower.png" alt="velvet" class="login-logo">
+        <h1>Admin Panel</h1>
+        <p>Login to access admin controls</p>
+      </div>
+      <form class="login-form" id="admin-login-form">
+        <div class="form-group">
+          <label for="admin-username">Username</label>
+          <input type="text" id="admin-username" required placeholder="Enter admin username">
+        </div>
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" required placeholder="Enter admin password">
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+      <p class="login-error" id="login-error"></p>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div class="admin-dashboard hidden" id="admin-dashboard">
+    <nav class="admin-nav">
+      <div class="nav-brand">
+        <a href="../index.html" class="back-arrow-nav" title="Back to website">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <img src="../flower.png" alt="velvet">
+        <span>Admin Panel</span>
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-ghost" id="logout-btn">Logout</button>
+      </div>
+    </nav>
+
+    <main>
+      <div class="dashboard-header">
+        <h1>Admin Panel</h1>
+        <p>Manage users, keys, and security</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value" id="total-users">0</div>
+          <div class="stat-label">Total Users</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="active-keys">0</div>
+          <div class="stat-label">Active Keys</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="banned-hwids">0</div>
+          <div class="stat-label">Banned HWIDs</div>
+        </div>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="users">Users</button>
+        <button class="admin-tab" data-tab="keys">Keys</button>
+        <button class="admin-tab" data-tab="hwid">HWID Management</button>
+      </div>
+
+      <div class="tab-content active" id="tab-users">
+        <div class="users-section">
+          <div class="section-header">
+            <h2>All Users</h2>
+            <div class="search-box">
+              <input type="text" id="search-users" placeholder="Search users...">
+            </div>
+          </div>
+          <div class="users-table-container">
+            <table class="users-table">
+              <thead>
+                <tr>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>HWID</th>
+                  <th>License</th>
+                  <th>Created</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="users-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content hidden" id="tab-keys">
+        <div class="keys-section">
+          <div class="section-header">
+            <h2>Key Management</h2>
+            <button class="btn btn-primary" id="create-key-btn">Create Key</button>
+          </div>
+          <div class="keys-table-container table-card">
+            <table class="users-table">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>Locked HWID</th>
+                  <th>Created</th>
+                  <th>Expires</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="keys-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content hidden" id="tab-hwid">
+        <div class="hwid-section">
+          <div class="section-header">
+            <h2>HWID Blacklist</h2>
+            <button class="btn btn-primary" id="add-hwid-btn">Add HWID</button>
+          </div>
+          <div class="hwid-table-container table-card">
+            <table class="users-table">
+              <thead>
+                <tr>
+                  <th>HWID</th>
+                  <th>Reason</th>
+                  <th>Added</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="hwid-table-body"></tbody>
+            </table>
+          </div>
+
+          <div class="section-header" style="margin-top: 32px;">
+            <h2>Locked HWIDs on Keys</h2>
+            <button class="btn btn-outline" id="reset-all-hwids-btn">Reset All HWID Locks</button>
+          </div>
+          <div class="hwid-table-container table-card">
+            <table class="users-table">
+              <thead>
+                <tr>
+                  <th>Key</th>
+                  <th>HWID</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="hwid-keys-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay hidden" id="edit-modal">
+    <div class="modal">
+      <button class="modal-close" id="close-edit-modal">&times;</button>
+      <h2>Edit User</h2>
+      <form class="edit-form" id="edit-user-form">
+        <input type="hidden" id="edit-user-id">
+        <div class="form-group">
+          <label for="edit-username">Username</label>
+          <input type="text" id="edit-username" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-email">Email</label>
+          <input type="email" id="edit-email" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-hwid">HWID</label>
+          <input type="text" id="edit-hwid" placeholder="Hardware ID">
+        </div>
+        <div class="form-group">
+          <label for="edit-status">Status</label>
+          <select id="edit-status">
+            <option value="active">Active</option>
+            <option value="banned">Banned</option>
+            <option value="suspended">Suspended</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" id="cancel-edit">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay hidden" id="create-key-modal">
+    <div class="modal">
+      <button class="modal-close" id="close-key-modal">&times;</button>
+      <h2>Create License Key</h2>
+      <form class="edit-form" id="create-key-form">
+        <div class="form-group">
+          <label for="key-duration">Duration (days, or "lifetime")</label>
+          <input type="text" id="key-duration" required placeholder="e.g. 30, 365, lifetime">
+        </div>
+        <div class="form-group">
+          <label for="key-note">Note (Optional)</label>
+          <input type="text" id="key-note" placeholder="Add a note">
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" id="cancel-key">Cancel</button>
+          <button type="submit" class="btn btn-primary">Generate Key</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay hidden" id="add-hwid-modal">
+    <div class="modal">
+      <button class="modal-close" id="close-hwid-modal">&times;</button>
+      <h2>Add HWID to Blacklist</h2>
+      <form class="edit-form" id="add-hwid-form">
+        <div class="form-group">
+          <label for="hwid-input">HWID</label>
+          <input type="text" id="hwid-input" required placeholder="Enter HWID">
+        </div>
+        <div class="form-group">
+          <label for="hwid-reason">Reason</label>
+          <input type="text" id="hwid-reason" required placeholder="Reason for ban">
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-outline" id="cancel-hwid">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add HWID</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../api.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>velvet</title>
+  <link rel="icon" href="flower.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="glow"></div>
+
+  <nav>
+    <a href="#" class="nav-brand">
+      <img src="flower.png" alt="velvet">
+      <span>velvet</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-ghost" id="login-btn">Login</button>
+      <button class="btn btn-primary" id="signup-btn">Sign Up</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <img src="flower.png" alt="" class="hero-logo">
+      <h1>Your hidden skill, <em>velvet.</em></h1>
+      <p>A secure, ultra-optimized streamable closet External loaded with advanced features — delivering smooth performance and complete privacy.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn btn-primary">Purchase</a>
+        <a href="#features" class="btn btn-outline">Learn More</a>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Simplicity, Elegance, Security. Perfected</h2>
+      <p class="section-desc">Experience privacy in style with our premium suite of services.</p>
+
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-stat">Roblox</div>
+          <h3>Roblox External</h3>
+          <p>Specialized external for Roblox with full compatibility across all games. Regular updates ensure it works with the latest Roblox updates.</p>
+          <div class="card-tags">
+            <span>All Games</span>
+            <span>Undetected</span>
+            <span>External</span>
+            <span>Safe</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-stat">50+</div>
+          <h3>Customization Options</h3>
+          <p>Fine-tune every aspect with adjustable settings. Customize aim assist, visual effects, and performance parameters to match your playstyle.</p>
+          <div class="card-tags">
+            <span>Aim Settings</span>
+            <span>Visuals</span>
+            <span>Performance</span>
+            <span>Hotkeys</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-stat">🛡️</div>
+          <h3>Advanced Security</h3>
+          <p>HWID-locked protection ensures your key stays secure. Cloud-based configuration syncs your settings across devices securely.</p>
+          <div class="card-tags">
+            <span>HWID Lock</span>
+            <span>Cloud Sync</span>
+            <span>Auto-Updates</span>
+            <span>24/7 Support</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Frequently asked questions</h2>
+      <p class="section-desc">Clear answers to the most common questions. Need more help? Reach out anytime.</p>
+
+      <div class="faq-tabs">
+        <button class="faq-tab active" data-tab="general">General</button>
+        <button class="faq-tab" data-tab="privacy">Privacy</button>
+        <button class="faq-tab" data-tab="security">Security</button>
+      </div>
+
+      <div class="faq-list" id="faq-general">
+        <div class="faq-item">
+          <button class="faq-q">Is the key permanent, or does it expire?</button>
+          <div class="faq-a"><p>Once you purchase a key for $44.99, you will receive a permanent key that never expires.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Will this affect my performance?</button>
+          <div class="faq-a"><p>No. velvet is highly optimized and has zero impact on performance.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Which games are compatible?</button>
+          <div class="faq-a"><p>There are over 25 supported games, and we're constantly adding more based on customer suggestions.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How quickly are updates released?</button>
+          <div class="faq-a"><p>We release feature updates as soon as we receive good suggestions. If a supported game becomes incompatible, we provide a fix on the same day.</p></div>
+        </div>
+      </div>
+
+      <div class="faq-list" id="faq-privacy" hidden>
+        <div class="faq-item">
+          <button class="faq-q">Do you log any information?</button>
+          <div class="faq-a"><p>The only information we store is your Discord ID and your product key. No additional data is collected.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can I request my data to be deleted?</button>
+          <div class="faq-a"><p>Yes. You can request data deletion and it will be permanently removed.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do you sell or share my information?</button>
+          <div class="faq-a"><p>No. The only information we log is your product key and Discord ID, used solely for authentication.</p></div>
+        </div>
+      </div>
+
+      <div class="faq-list" id="faq-security" hidden>
+        <div class="faq-item">
+          <button class="faq-q">How secure is the product?</button>
+          <div class="faq-a"><p>velvet is built with multiple layers of protection and advanced anti-leak mechanisms, keeping your account and key safe at all times.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can my key be stolen?</button>
+          <div class="faq-a"><p>Your key is locked to your HWID. Even if someone gets access to it, they can't use it without your hardware ID.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What happens if the game updates?</button>
+          <div class="faq-a"><p>The External automatically checks for code changes. If detected, it temporarily becomes unusable until our developers verify it for your safety.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">Simple payment methods</h2>
+      <p class="section-desc">Get lifetime access to external.</p>
+
+      <div class="pricing-grid">
+        <div class="price-card featured" style="grid-column: 1 / -1; max-width: 500px; margin: 0 auto;">
+          <span class="badge">Lifetime Access</span>
+          <h3>external</h3>
+          <div class="price">$24.99</div>
+          <p class="price-note">One-time payment · Lifetime access</p>
+          <ul class="price-features">
+            <li>PC Check Bypass</li>
+            <li>External Bypass</li>
+            <li>HWID Spoofer</li>
+            <li>Cloud Configuration Sync</li>
+            <li>Dashboard Access</li>
+            <li>Priority Support</li>
+          </ul>
+          <a href="#" class="btn btn-primary" style="width:100%">Purchase with Crypto</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-brand">
+      <img src="flower.png" alt="">
+      velvet
+    </div>
+    <p>&copy; 2026 velvet. All rights reserved.</p>
+  </footer>
+
+  <!-- Auth Modal -->
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal">
+      <button class="modal-close" id="modal-close">&times;</button>
+      
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="login">Login</button>
+        <button class="modal-tab" data-tab="signup">Sign Up</button>
+      </div>
+
+      <form class="auth-form" id="login-form">
+        <div class="form-group">
+          <label for="login-username">Username</label>
+          <input type="text" id="login-username" required placeholder="Enter your username">
+        </div>
+        <div class="form-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required placeholder="Enter your password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%">Login</button>
+      </form>
+
+      <form class="auth-form hidden" id="signup-form">
+        <div class="form-group">
+          <label for="signup-username">Username</label>
+          <input type="text" id="signup-username" required placeholder="Choose a username">
+        </div>
+        <div class="form-group">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" required placeholder="Choose a password">
+        </div>
+        <div class="form-group">
+          <label for="signup-confirm">Confirm Password</label>
+          <input type="password" id="signup-confirm" required placeholder="Confirm your password">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%">Sign Up</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
