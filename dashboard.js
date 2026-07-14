@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   try {
     const user = await VelvetAPI.getMe();
     initializeDashboard(user);
-    setupConfigInterface();
+    try { setupConfigInterface(); } catch (e) { console.warn('Config UI skipped', e); }
   } catch {
     VelvetAPI.logout();
     window.location.href = 'index.html';

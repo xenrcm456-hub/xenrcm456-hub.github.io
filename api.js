@@ -38,10 +38,10 @@ const VelvetAPI = (() => {
     clearToken,
 
     // User auth
-    async register(username, password) {
+    async register(username, password, key, hwid) {
       const data = await request('auth/register', {
         method: 'POST',
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password, key, hwid })
       });
       setToken(data.token);
       localStorage.setItem('user', JSON.stringify(data.user));

@@ -100,6 +100,15 @@ function redirectToDashboard() {
   setTimeout(() => { window.location.href = 'dashboard.html'; }, 400);
 }
 
+function generateHwid() {
+  let hwid = localStorage.getItem('simulatedHwid');
+  if (!hwid) {
+    hwid = 'HWID-' + crypto.randomUUID().replace(/-/g, '').slice(0, 16);
+    localStorage.setItem('simulatedHwid', hwid);
+  }
+  return hwid;
+}
+
 loginForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const username = document.getElementById('login-username').value;
@@ -124,12 +133,17 @@ loginForm.addEventListener('submit', async (e) => {
 
 signupForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const username = document.getElementById('signup-username').value;
+  const username = document.getElementById('signup-username').value.trim();
   const password = document.getElementById('signup-password').value;
+  const key = document.getElementById('signup-key').value.trim();
   const confirm = document.getElementById('signup-confirm').value;
 
   if (password !== confirm) {
     alert('Passwords do not match!');
+    return;
+  }
+  if (!key.toUpperCase().startsWith('VELVET-')) {
+    alert('Enter a valid VELVET- license key.');
     return;
   }
 
@@ -139,7 +153,7 @@ signupForm.addEventListener('submit', async (e) => {
   submitBtn.disabled = true;
 
   try {
-    await VelvetAPI.register(username, password);
+    await VelvetAPI.register(username, password, key, generateHwid());
     closeModal();
     redirectToDashboard();
   } catch (err) {
