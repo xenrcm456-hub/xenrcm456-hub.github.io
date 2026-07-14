@@ -71,7 +71,7 @@ function setupEventListeners() {
 
 async function handleAdminLogin(e) {
   e.preventDefault();
-  const username = document.getElementById('admin-username').value;
+  const username = document.getElementById('admin-username').value.trim();
   const password = document.getElementById('admin-password').value;
   const errorEl = document.getElementById('login-error');
 
@@ -80,7 +80,7 @@ async function handleAdminLogin(e) {
     errorEl.textContent = '';
     showDashboard();
   } catch (err) {
-    errorEl.textContent = err.message;
+    errorEl.textContent = err.message || 'Invalid username or password';
   }
 }
 
@@ -259,7 +259,7 @@ async function updateStats() {
     document.getElementById('active-keys').textContent = stats.activeKeys;
     document.getElementById('banned-hwids').textContent = stats.bannedHwids;
   } catch {
-    // stats optional on load
+    // optional on load
   }
 }
 
