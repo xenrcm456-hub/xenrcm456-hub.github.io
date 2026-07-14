@@ -5,7 +5,7 @@ pages_build_output_dir = "."
 [[d1_databases]]
 binding = "DB"
 database_name = "velvet-db"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "db0dae2e-2d11-48ba-b84a-d9fa089aec14"
 
 [vars]
 # Set real secrets in Cloudflare Dashboard → Settings → Environment variables
